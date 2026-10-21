@@ -1,0 +1,104 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ZONO - Watch, Share & Connect</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#0f0f0f;color:white;font-family:Arial,sans-serif}
+header{height:60px;background:#181818;display:flex;align-items:center;gap:12px;padding:10px 16px;position:sticky;top:0}
+.logo{font-size:26px;font-weight:bold;color:#ff3434}
+.search{flex:1;min-width:0;background:#292929;border:1px solid #444;border-radius:22px;padding:10px;color:white}
+button{background:#292929;color:white;border:0;padding:10px 13px;border-radius:9px;cursor:pointer}
+.layout{display:flex}
+aside{width:190px;padding:15px;flex-shrink:0}
+aside button{display:block;width:100%;text-align:left;margin-bottom:8px}
+main{padding:18px;min-width:0;flex:1}
+h2{font-size:21px}
+.categories{display:flex;gap:9px;overflow:auto;padding:8px 0 18px}
+.categories button{white-space:nowrap}
+.categories button.active{background:white;color:black}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+.video{background:#1b1b1b;border-radius:12px;overflow:hidden}
+.thumb{height:130px;background:linear-gradient(135deg,#363636,#202020);display:grid;place-items:center;font-size:44px}
+.video h3{font-size:16px;margin:12px}
+.video p{color:#aaa;margin:12px;font-size:13px}
+.section{display:none}
+.section.active{display:block}
+footer{padding:25px;color:#aaa;text-align:center}
+@media(max-width:600px){
+aside{width:65px;padding:8px 4px}
+aside button{font-size:0;text-align:center;padding:12px 3px}
+aside button:first-letter{font-size:19px}
+main{padding:10px}
+.grid{grid-template-columns:1fr}
+.thumb{height:180px}
+header{gap:7px;padding:8px}
+.logo{font-size:21px}
+}
+</style>
+</head>
+<body>
+<header>
+<button onclick="toggleMenu()">☰</button>
+<div class="logo">ZONO</div>
+<input class="search" id="search" placeholder="Search ZONO..." oninput="searchVideos()">
+<button onclick="alert('Login feature will be connected in the next step')">Login</button>
+</header>
+<div class="layout">
+<aside id="sidebar">
+<button onclick="showSection('home')">🏠 Home</button>
+<button onclick="showSection('shorts')">🎬 Shorts</button>
+<button onclick="showSection('trending')">🔥 Trending</button>
+<button onclick="showSection('subscriptions')">📺 Subscriptions</button>
+<button onclick="showSection('social')">👥 Social</button>
+<button onclick="showSection('live')">🔴 Live</button>
+<button onclick="showSection('market')">🛍️ Market</button>
+<button onclick="showSection('library')">📚 Library</button>
+</aside>
+<main>
+<section id="home" class="section active">
+<h2>Explore ZONO</h2>
+<div class="categories">
+<button class="active">All</button><button>Music</button><button>Gaming</button><button>News</button><button>Short videos</button><button>Learning</button>
+</div>
+<h2>Recommended videos</h2>
+<div class="grid" id="videoGrid">
+<div class="video"><div class="thumb">▶️</div><h3>Welcome to ZONO</h3><p>ZONO Creator · Sample video</p></div>
+<div class="video"><div class="thumb">🎵</div><h3>Music & Entertainment</h3><p>ZONO Music · Sample video</p></div>
+<div class="video"><div class="thumb">🎮</div><h3>Gaming Zone</h3><p>ZONO Gaming · Sample video</p></div>
+<div class="video"><div class="thumb">🌍</div><h3>Explore the World</h3><p>ZONO World · Sample video</p></div>
+</div>
+</section>
+<section id="shorts" class="section"><h2>🎬 ZONO Shorts</h2><p>Short videos will appear here.</p></section>
+<section id="trending" class="section"><h2>🔥 Trending</h2><p>Popular videos will appear here.</p></section>
+<section id="subscriptions" class="section"><h2>📺 Subscriptions</h2><p>Your subscribed creators will appear here.</p></section>
+<section id="social" class="section"><h2>👥 ZONO Social</h2><p>Posts, friends, stories, groups and chat will be added here.</p></section>
+<section id="live" class="section"><h2>🔴 ZONO Live</h2><p>Live streaming and TV links will be added here.</p></section>
+<section id="market" class="section"><h2>🛍️ ZONO Market</h2><p>Products, sellers, cart and orders will be added here.</p></section>
+<section id="library" class="section"><h2>📚 Your Library</h2><p>Your saved videos will appear here.</p></section>
+</main>
+</div>
+<footer>ZONO · Watch · Share · Connect</footer>
+<script>
+function toggleMenu(){
+const s=document.getElementById('sidebar');
+s.style.display=s.style.display==='none'?'block':'none';
+}
+function showSection(id){
+document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+document.getElementById(id).classList.add('active');
+window.scrollTo(0,0);
+}
+function searchVideos(){
+const q=document.getElementById('search').value.toLowerCase();
+document.querySelectorAll('#videoGrid .video').forEach(v=>{
+v.style.display=v.innerText.toLowerCase().includes(q)?'block':'none';
+});
+}
+</script>
+</body>
+  </html>
+  
