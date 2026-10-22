@@ -61,14 +61,28 @@ function msg(t){
 }
 
 async function signup(){
-  const email=document.getElementById("email").value.trim();
-  const password=document.getElementById("password").value;
-  if(!email || password.length<6){
-    msg("Enter email and a password of at least 6 characters.");
-    return;
+  try {
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value;
+
+    if (!email || password.length < 6) {
+      msg("Enter email and a password of at least 6 characters.");
+      return;
+    }
+
+    msg("Creating account...");
+
+    const { data, error } = await db.auth.signUp({ email, password });
+
+    if (error) {
+      msg("Signup error: " + error.message);
+      return;
+    }
+
+    msg("Account request sent. Check email if confirmation is required.");
+  } catch (e) {
+    msg("Signup error: " + e.message);
   }
-  const {error}=await db.auth.signUp({email,password});
-  msg(error ? error.message : "Account created. Check email if confirmation is required, then log in.");
 }
 
 async function login(){
