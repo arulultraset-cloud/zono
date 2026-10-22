@@ -177,25 +177,46 @@ async function loadVideos(){
   }
 }
 
+
 async function refresh(){
   document.getElementById("upload").classList.toggle("hidden",!user);
   if(user) await loadVideos();
 }
 
 async function start(){
-  if(KEY==="YOUR_PUBLISHABLE_KEY"){
-    msg("Setup needed: add your Supabase Publishable Key in the code.");
-    return;
+  try {
+    if(KEY==="YOUR_PUBLISHABLE_KEY"){
+      msg("Setup needed: add your Supabase Publishable Key in the code.");
+      return;
+    }
+
+    msg("Connecting to Supabase...");
+
+    const {data,error}=await db.auth.getSession();
+
+    if(error){
+      msg("Connection error: "+error.message);
+      return;
+    }
+
+    user=data.session ? data.session.user : null;
+    await refresh();
+
+    db.auth.onAuthStateChange((_event,session)=>{
+      user=session ? session.user : null;
+      refresh().catch(e=>msg("Refresh error: "+e.message));
+    });
+
+    msg(user ? "Connected. You are logged in." : "Connected. Please log in or create an account.");
+
+  } catch(e) {
+    msg("Startup error: "+e.message);
   }
-  const {data}=await db.auth.getSession();
-  user=data.session ? data.session.user : null;
-  await refresh();
-  db.auth.onAuthStateChange((_event,session)=>{
-    user=session ? session.user : null;
-    refresh();
-  });
 }
+
+console.log("ZONO Supabase initialized:", typeof db);
 start();
 </script>
 </body>
 </html>
+
