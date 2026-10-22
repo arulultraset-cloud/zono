@@ -1,104 +1,187 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ZONO - Watch, Share & Connect</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ZONO - Videos</title>
 <style>
-*{box-sizing:border-box}
-body{margin:0;background:#0f0f0f;color:white;font-family:Arial,sans-serif}
-header{height:60px;background:#181818;display:flex;align-items:center;gap:12px;padding:10px 16px;position:sticky;top:0}
-.logo{font-size:26px;font-weight:bold;color:#ff3434}
-.search{flex:1;min-width:0;background:#292929;border:1px solid #444;border-radius:22px;padding:10px;color:white}
-button{background:#292929;color:white;border:0;padding:10px 13px;border-radius:9px;cursor:pointer}
-.layout{display:flex}
-aside{width:190px;padding:15px;flex-shrink:0}
-aside button{display:block;width:100%;text-align:left;margin-bottom:8px}
-main{padding:18px;min-width:0;flex:1}
-h2{font-size:21px}
-.categories{display:flex;gap:9px;overflow:auto;padding:8px 0 18px}
-.categories button{white-space:nowrap}
-.categories button.active{background:white;color:black}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
-.video{background:#1b1b1b;border-radius:12px;overflow:hidden}
-.thumb{height:130px;background:linear-gradient(135deg,#363636,#202020);display:grid;place-items:center;font-size:44px}
-.video h3{font-size:16px;margin:12px}
-.video p{color:#aaa;margin:12px;font-size:13px}
-.section{display:none}
-.section.active{display:block}
-footer{padding:25px;color:#aaa;text-align:center}
-@media(max-width:600px){
-aside{width:65px;padding:8px 4px}
-aside button{font-size:0;text-align:center;padding:12px 3px}
-aside button:first-letter{font-size:19px}
-main{padding:10px}
-.grid{grid-template-columns:1fr}
-.thumb{height:180px}
-header{gap:7px;padding:8px}
-.logo{font-size:21px}
-}
+body{margin:0;background:#101010;color:white;font-family:Arial}
+header{background:#222;padding:15px;display:flex;gap:12px;align-items:center}
+.logo{font-size:25px;font-weight:bold;color:#ff3434}
+button{padding:10px;border:0;border-radius:7px;cursor:pointer;margin:4px}
+input,textarea{display:block;width:95%;padding:12px;margin:10px 0;background:#292929;color:white;border:1px solid #555;border-radius:7px}
+main{padding:15px}
+.panel,.video{background:#202020;padding:14px;margin:12px 0;border-radius:10px}
+.video video{width:100%;max-height:350px}
+.hidden{display:none}
+#status{color:#ffd166;overflow-wrap:anywhere}
 </style>
 </head>
 <body>
 <header>
-<button onclick="toggleMenu()">☰</button>
 <div class="logo">ZONO</div>
-<input class="search" id="search" placeholder="Search ZONO..." oninput="searchVideos()">
-<button onclick="alert('Login feature will be connected in the next step')">Login</button>
+<span>Watch · Share · Connect</span>
 </header>
-<div class="layout">
-<aside id="sidebar">
-<button onclick="showSection('home')">🏠 Home</button>
-<button onclick="showSection('shorts')">🎬 Shorts</button>
-<button onclick="showSection('trending')">🔥 Trending</button>
-<button onclick="showSection('subscriptions')">📺 Subscriptions</button>
-<button onclick="showSection('social')">👥 Social</button>
-<button onclick="showSection('live')">🔴 Live</button>
-<button onclick="showSection('market')">🛍️ Market</button>
-<button onclick="showSection('library')">📚 Library</button>
-</aside>
+
 <main>
-<section id="home" class="section active">
-<h2>Explore ZONO</h2>
-<div class="categories">
-<button class="active">All</button><button>Music</button><button>Gaming</button><button>News</button><button>Short videos</button><button>Learning</button>
+<h2>Welcome to ZONO</h2>
+
+<div class="panel" id="account">
+<h3>Login / Create Account</h3>
+<input id="email" type="email" placeholder="Email address">
+<input id="password" type="password" placeholder="Password (6 characters minimum)">
+<button onclick="login()">Login</button>
+<button onclick="signup()">Create Account</button>
+<button onclick="logout()">Logout</button>
 </div>
-<h2>Recommended videos</h2>
-<div class="grid" id="videoGrid">
-<div class="video"><div class="thumb">▶️</div><h3>Welcome to ZONO</h3><p>ZONO Creator · Sample video</p></div>
-<div class="video"><div class="thumb">🎵</div><h3>Music & Entertainment</h3><p>ZONO Music · Sample video</p></div>
-<div class="video"><div class="thumb">🎮</div><h3>Gaming Zone</h3><p>ZONO Gaming · Sample video</p></div>
-<div class="video"><div class="thumb">🌍</div><h3>Explore the World</h3><p>ZONO World · Sample video</p></div>
+
+<div class="panel hidden" id="upload">
+<h3>Upload Video</h3>
+<input id="title" placeholder="Video title">
+<textarea id="description" placeholder="Video description"></textarea>
+<input id="file" type="file" accept="video/*">
+<button onclick="uploadVideo()">Upload</button>
+<p>Free upload limit: 50 MB per video.</p>
 </div>
-</section>
-<section id="shorts" class="section"><h2>🎬 ZONO Shorts</h2><p>Short videos will appear here.</p></section>
-<section id="trending" class="section"><h2>🔥 Trending</h2><p>Popular videos will appear here.</p></section>
-<section id="subscriptions" class="section"><h2>📺 Subscriptions</h2><p>Your subscribed creators will appear here.</p></section>
-<section id="social" class="section"><h2>👥 ZONO Social</h2><p>Posts, friends, stories, groups and chat will be added here.</p></section>
-<section id="live" class="section"><h2>🔴 ZONO Live</h2><p>Live streaming and TV links will be added here.</p></section>
-<section id="market" class="section"><h2>🛍️ ZONO Market</h2><p>Products, sellers, cart and orders will be added here.</p></section>
-<section id="library" class="section"><h2>📚 Your Library</h2><p>Your saved videos will appear here.</p></section>
+
+<h2>ZONO Videos</h2>
+<div id="videos"></div>
+<p id="status"></p>
 </main>
-</div>
-<footer>ZONO · Watch · Share · Connect</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-function toggleMenu(){
-const s=document.getElementById('sidebar');
-s.style.display=s.style.display==='none'?'block':'none';
+const URL = "https://crzxuxcffqgrqntjrxod.supabase.co";
+const KEY = "sb_publishable_Kxsql_aPZEknvC2mEHEG1Q_jt_gVFzj";
+const db = window.supabase.createClient(URL, KEY);
+let user = null;
+
+function msg(t){
+  document.getElementById("status").textContent=t;
 }
-function showSection(id){
-document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
-document.getElementById(id).classList.add('active');
-window.scrollTo(0,0);
+
+async function signup(){
+  const email=document.getElementById("email").value.trim();
+  const password=document.getElementById("password").value;
+  if(!email || password.length<6){
+    msg("Enter email and a password of at least 6 characters.");
+    return;
+  }
+  const {error}=await db.auth.signUp({email,password});
+  msg(error ? error.message : "Account created. Check email if confirmation is required, then log in.");
 }
-function searchVideos(){
-const q=document.getElementById('search').value.toLowerCase();
-document.querySelectorAll('#videoGrid .video').forEach(v=>{
-v.style.display=v.innerText.toLowerCase().includes(q)?'block':'none';
-});
+
+async function login(){
+  const email=document.getElementById("email").value.trim();
+  const password=document.getElementById("password").value;
+  const {data,error}=await db.auth.signInWithPassword({email,password});
+  if(error){msg(error.message);return;}
+  user=data.user;
+  await refresh();
+  msg("Login successful!");
 }
+
+async function logout(){
+  const {error}=await db.auth.signOut();
+  if(error){msg(error.message);return;}
+  user=null;
+  document.getElementById("upload").classList.add("hidden");
+  document.getElementById("videos").innerHTML="";
+  msg("Logged out.");
+}
+
+async function uploadVideo(){
+  if(!user){msg("Please log in first.");return;}
+  const file=document.getElementById("file").files[0];
+  const title=document.getElementById("title").value.trim();
+  const description=document.getElementById("description").value.trim();
+
+  if(!file || !file.type.startsWith("video/") || !title){
+    msg("Choose a video and enter its title.");
+    return;
+  }
+  if(file.size>50*1024*1024){
+    msg("Video is over 50 MB. Choose a smaller video.");
+    return;
+  }
+
+  const path=user.id+"/"+Date.now()+"-"+file.name.replace(/[^a-zA-Z0-9._-]/g,"_");
+  msg("Uploading video. Please wait...");
+
+  const {error:upError}=await db.storage.from("zono-videos")
+    .upload(path,file,{contentType:file.type,upsert:false});
+
+  if(upError){msg("Upload error: "+upError.message);return;}
+
+  const {error:dbError}=await db.from("videos").insert({
+    user_id:user.id,
+    title:title,
+    description:description,
+    video_url:path
+  });
+
+  if(dbError){msg("Video uploaded, but details could not be saved: "+dbError.message);return;}
+
+  document.getElementById("title").value="";
+  document.getElementById("description").value="";
+  document.getElementById("file").value="";
+  msg("Video uploaded!");
+  await loadVideos();
+}
+
+async function loadVideos(){
+  const area=document.getElementById("videos");
+  area.innerHTML="";
+  const {data,error}=await db.from("videos")
+    .select("title,description,video_url,created_at")
+    .order("created_at",{ascending:false});
+
+  if(error){msg("Video list error: "+error.message);return;}
+
+  if(!data || !data.length){
+    area.textContent="No videos uploaded yet.";
+    return;
+  }
+
+  for(const v of data){
+    const {data:signed,error:signError}=await db.storage
+      .from("zono-videos").createSignedUrl(v.video_url,3600);
+    if(signError) continue;
+
+    const card=document.createElement("div");
+    card.className="video";
+    const player=document.createElement("video");
+    player.controls=true;
+    player.preload="metadata";
+    player.src=signed.signedUrl;
+    const heading=document.createElement("h3");
+    heading.textContent=v.title||"ZONO Video";
+    const desc=document.createElement("p");
+    desc.textContent=v.description||"";
+    card.append(player,heading,desc);
+    area.appendChild(card);
+  }
+}
+
+async function refresh(){
+  document.getElementById("upload").classList.toggle("hidden",!user);
+  if(user) await loadVideos();
+}
+
+async function start(){
+  if(KEY==="YOUR_PUBLISHABLE_KEY"){
+    msg("Setup needed: add your Supabase Publishable Key in the code.");
+    return;
+  }
+  const {data}=await db.auth.getSession();
+  user=data.session ? data.session.user : null;
+  await refresh();
+  db.auth.onAuthStateChange((_event,session)=>{
+    user=session ? session.user : null;
+    refresh();
+  });
+}
+start();
 </script>
 </body>
-  </html>
-  
+</html>
