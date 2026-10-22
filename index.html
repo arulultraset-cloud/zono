@@ -3,192 +3,52 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#08091d">
 <title>ZONO Videos</title>
 <style>
-:root {
-  --bg:#050617;
-  --panel:#111432;
-  --purple:#851cff;
-  --pink:#e51cff;
-  --text:#ffffff;
-  --muted:#b4b8d9;
-}
-* { box-sizing:border-box; }
-body {
-  margin:0;
-  background:var(--bg);
-  color:var(--text);
-  font-family:Arial,sans-serif;
-}
-button,input,textarea { font:inherit; }
-button {
-  cursor:pointer;
-  border:0;
-  padding:10px 14px;
-  border-radius:10px;
-  color:white;
-  background:#252750;
-}
-button:hover { filter:brightness(1.2); }
-.primary {
-  background:linear-gradient(100deg,#7714ff,#e018dd,#167bff);
-}
-header {
-  position:sticky;
-  top:0;
-  z-index:10;
-  display:flex;
-  align-items:center;
-  gap:15px;
-  padding:14px;
-  background:#08091df5;
-  border-bottom:1px solid #292956;
-}
-.logo { font-size:25px;font-weight:bold;white-space:nowrap; }
-.logo span { color:#c83cff; }
-.search { display:flex;gap:6px;flex:1; }
-.search input {
-  width:100%;
-  min-width:0;
-  background:#171936;
-  border:1px solid #39376d;
-  color:white;
-  border-radius:25px;
-  padding:12px;
-}
-.layout {
-  display:grid;
-  grid-template-columns:190px minmax(0,1fr);
-  gap:18px;
-  padding:16px;
-  max-width:1700px;
-  margin:auto;
-}
-aside { position:sticky;top:85px;align-self:start; }
-.nav {
-  display:block;
-  width:100%;
-  text-align:left;
-  margin-bottom:5px;
-  background:transparent;
-}
-.nav.active,.nav:hover {
-  background:linear-gradient(100deg,#8016ff,#302071);
-}
-.hero {
-  padding:35px;
-  min-height:270px;
-  border:1px solid #6939d9;
-  border-radius:18px;
-  background:
-    radial-gradient(ellipse at 80% 20%,#1648d9,transparent 45%),
-    radial-gradient(ellipse at 10% 90%,#bb0bd4,transparent 45%),
-    linear-gradient(120deg,#13083d,#071b50);
-}
-.hero h1 { font-size:clamp(35px,5vw,65px);margin:10px 0; }
-.hero p { color:#e4e5ff;font-size:18px; }
-.categories {
-  display:flex;
-  gap:8px;
-  overflow:auto;
-  padding:16px 0;
-}
-.categories button { white-space:nowrap; }
-.categories .active { background:white;color:#111; }
-h2 { font-size:21px; }
-.video-grid {
-  display:grid;
-  grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:16px;
-}
-.video-card {
-  min-width:0;
-  padding-bottom:12px;
-  background:var(--panel);
-  border:1px solid #242650;
-  border-radius:13px;
-  overflow:hidden;
-}
-.video-card video {
-  width:100%;
-  aspect-ratio:16/9;
-  display:block;
-  background:#000;
-}
-.video-details { padding:10px; }
-.video-details h3 { margin:0 0 7px;font-size:15px; }
-.video-details p { color:var(--muted);font-size:13px; }
-.actions { display:flex;gap:5px;flex-wrap:wrap;padding:0 8px; }
-.actions button { font-size:12px; }
-.panel {
-  background:var(--panel);
-  border:1px solid #292b5c;
-  border-radius:14px;
-  padding:15px;
-  margin-top:18px;
-}
-.hidden { display:none!important; }
-#status { color:#ffdf7c;overflow-wrap:anywhere; }
-.modal-bg {
-  position:fixed;
-  inset:0;
-  z-index:30;
-  background:#000c;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  padding:15px;
-}
-.modal {
-  width:min(100%,420px);
-  max-height:90vh;
-  overflow:auto;
-  background:#121432;
-  border:1px solid #7039c5;
-  border-radius:18px;
-  padding:22px;
-}
-.modal input,.panel input,.panel textarea {
-  display:block;
-  width:100%;
-  padding:12px;
-  margin:9px 0;
-  background:#080a20;
-  border:1px solid #39395f;
-  border-radius:9px;
-  color:white;
-}
-.footer {
-  text-align:center;
-  color:var(--muted);
-  padding:25px;
-}
-@media(max-width:900px) {
-  .layout { grid-template-columns:65px minmax(0,1fr);gap:10px;padding:10px; }
-  .nav { text-align:center;padding:12px 4px;font-size:12px; }
-  .nav span { display:none; }
-  .video-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
-}
-@media(max-width:560px) {
-  header { flex-wrap:wrap;gap:8px; }
-  .logo { font-size:21px; }
-  .search { order:3;flex-basis:100%; }
-  .layout { grid-template-columns:1fr; }
-  aside { position:static;display:flex;overflow:auto;gap:5px; }
-  .nav { width:auto;flex:0 0 auto;white-space:nowrap; }
-  .nav span { display:inline; }
-  .video-grid { grid-template-columns:1fr; }
-  .hero { padding:23px;min-height:220px; }
-}
+:root{--bg:#050617;--panel:#111432;--purple:#851cff;--pink:#e51cff;--text:#fff;--muted:#b4b8d9;--line:#292956}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,sans-serif}
+button,input,textarea{font:inherit}
+button{cursor:pointer;border:0;padding:10px 14px;border-radius:10px;color:white;background:#252750}
+button:hover{filter:brightness(1.15)}
+button:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid #c83cff;outline-offset:2px}
+.primary{background:linear-gradient(100deg,#7714ff,#e018dd,#167bff)}
+header{position:sticky;top:0;z-index:10;display:flex;align-items:center;gap:12px;padding:12px 16px;background:#08091df5;border-bottom:1px solid var(--line);backdrop-filter:blur(12px)}
+.logo{font-size:25px;font-weight:bold;white-space:nowrap}.logo span{color:#c83cff}
+.search{display:flex;gap:6px;flex:1}.search input{width:100%;min-width:0;background:#171936;border:1px solid #39376d;color:white;border-radius:25px;padding:12px}
+.layout{display:grid;grid-template-columns:190px minmax(0,1fr);gap:18px;padding:16px;max-width:1700px;margin:auto}
+aside{position:sticky;top:85px;align-self:start}
+.nav{display:block;width:100%;text-align:left;margin-bottom:5px;background:transparent}
+.nav.active,.nav:hover{background:linear-gradient(100deg,#8016ff,#302071)}
+.hero{padding:35px;min-height:250px;border:1px solid #6939d9;border-radius:18px;background:radial-gradient(ellipse at 80% 20%,#1648d9,transparent 45%),radial-gradient(ellipse at 10% 90%,#bb0bd4,transparent 45%),linear-gradient(120deg,#13083d,#071b50)}
+.hero h1{font-size:clamp(35px,5vw,65px);margin:10px 0}.hero p{color:#e4e5ff;font-size:18px}
+.categories{display:flex;gap:8px;overflow:auto;padding:16px 0}.categories button{white-space:nowrap;flex:0 0 auto}.categories .active{background:white;color:#111}
+h2{font-size:21px}.video-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.video-card{min-width:0;padding-bottom:12px;background:var(--panel);border:1px solid #242650;border-radius:13px;overflow:hidden}
+.video-card video{width:100%;aspect-ratio:16/9;display:block;background:#000;object-fit:contain}
+.video-details{padding:10px}.video-details h3{margin:0 0 7px;font-size:15px;overflow-wrap:anywhere}.video-details p{color:var(--muted);font-size:13px;overflow-wrap:anywhere}
+.actions{display:flex;gap:5px;flex-wrap:wrap;padding:0 8px}.actions button{font-size:12px}
+.panel{background:var(--panel);border:1px solid #292b5c;border-radius:14px;padding:15px;margin-top:18px}
+.hidden{display:none!important}#status{color:#ffdf7c;overflow-wrap:anywhere;white-space:pre-wrap}
+.modal-bg{position:fixed;inset:0;z-index:30;background:#000c;display:flex;justify-content:center;align-items:center;padding:15px}
+.modal{width:min(100%,420px);max-height:90vh;overflow:auto;background:#121432;border:1px solid #7039c5;border-radius:18px;padding:22px}
+.modal input,.panel input,.panel textarea{display:block;width:100%;padding:12px;margin:9px 0;background:#080a20;border:1px solid #39395f;border-radius:9px;color:white}
+.panel textarea{min-height:90px;resize:vertical}
+.footer{text-align:center;color:var(--muted);padding:25px}
+.empty{grid-column:1/-1}
+@media(max-width:1100px){.video-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:900px){.layout{grid-template-columns:65px minmax(0,1fr);gap:10px;padding:10px}.nav{text-align:center;padding:12px 4px;font-size:12px}.nav span{display:none}}
+@media(max-width:560px){header{flex-wrap:wrap;gap:8px;padding:10px}.logo{font-size:21px}.search{order:3;flex-basis:100%}.layout{grid-template-columns:1fr}.layout>aside{position:static;display:flex;overflow-x:auto;gap:5px}.nav{width:auto;flex:0 0 auto;white-space:nowrap}.nav span{display:inline}.layout aside .panel{display:none}.video-grid{grid-template-columns:1fr}.hero{padding:23px;min-height:220px}.hero p{font-size:16px}}
 </style>
 </head>
 <body>
-
 <header>
   <div class="logo">▶ ZONO <span>Videos</span></div>
   <form class="search" onsubmit="event.preventDefault();searchVideos()">
-    <input id="searchInput" placeholder="Search videos, creators, topics...">
-    <button class="primary">Search</button>
+    <input id="searchInput" aria-label="Search videos" placeholder="Search videos, creators, topics...">
+    <button class="primary" type="submit">Search</button>
   </form>
   <button id="accountButton" class="primary" onclick="openAuth()">Sign in</button>
   <button id="logoutButton" class="hidden" onclick="logout()">Logout</button>
@@ -208,16 +68,12 @@ h2 { font-size:21px; }
     <button class="nav" onclick="showSection('Liked Videos',this)">♡ <span>Liked Videos</span></button>
     <button class="nav" onclick="showSection('Downloads',this)">↓ <span>Downloads</span></button>
     <button class="nav" onclick="createChannel()">＋ <span>Create Channel</span></button>
-    <div class="panel">
-      <strong>👑 ZONO Premium</strong>
-      <p class="muted">Watch · Create · Share</p>
-    </div>
+    <div class="panel"><strong>👑 ZONO Premium</strong><p class="muted">Watch · Create · Share</p></div>
   </aside>
 
   <main>
     <section class="hero">
-      <p>WELCOME TO</p>
-      <h1>ZONO Videos</h1>
+      <p>WELCOME TO</p><h1>ZONO Videos</h1>
       <p>Watch · Create · Share</p>
       <p>Upload your videos and inspire the world!</p>
       <button class="primary" onclick="openUpload()">⬆ Upload Video</button>
@@ -236,8 +92,8 @@ h2 { font-size:21px; }
 
     <section id="videosSection">
       <h2 id="videoHeading">✨ Videos for you</h2>
-      <div id="videos">
-        <div class="panel">Connecting to ZONO videos...</div>
+      <div id="videos" class="video-grid">
+        <div class="panel empty">Connecting to ZONO videos...</div>
       </div>
     </section>
 
@@ -246,12 +102,11 @@ h2 { font-size:21px; }
       <input id="videoTitle" placeholder="Video title">
       <textarea id="videoDescription" placeholder="Video description"></textarea>
       <input id="videoFile" type="file" accept="video/*">
-      <p class="muted">Supabase Free upload limit: 50 MB per video.</p>
+      <p class="muted">இந்த டெமோவில் அதிகபட்சம் 50 MB வீடியோ மட்டும்.</p>
       <button class="primary" onclick="uploadVideo()">Upload Video</button>
       <button onclick="closeUpload()">Cancel</button>
     </section>
-
-    <p id="status"></p>
+    <p id="status" role="status"></p>
     <div class="footer">© ZONO Videos · Watch · Create · Share</div>
   </main>
 </div>
@@ -259,18 +114,19 @@ h2 { font-size:21px; }
 <div id="authModal" class="modal-bg hidden">
   <div class="modal">
     <button style="float:right" onclick="closeAuth()">✕</button>
-    <h2 id="authTitle">Welcome to ZONO</h2>
+    <h2>Welcome to ZONO</h2>
     <p id="authReason" class="muted">Sign in or create a free account.</p>
-    <input id="authEmail" type="email" placeholder="Email address">
-    <input id="authPassword" type="password" placeholder="Password (minimum 6 characters)">
+    <input id="authEmail" type="email" placeholder="Email address" autocomplete="email">
+    <input id="authPassword" type="password" placeholder="Password (minimum 6 characters)" autocomplete="current-password">
     <button class="primary" style="width:100%;margin-top:8px" onclick="login()">Sign In</button>
     <button style="width:100%;margin-top:8px" onclick="signup()">Create Account</button>
-    <p class="muted">Watching videos does not require an account. An account is needed for download, share, upload and other personal features.</p>
+    <p class="muted">Account features require a correctly configured Supabase project.</p>
   </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
+/* Keep your existing Supabase project details here. Never put a service_role key in browser HTML. */
 const SUPABASE_URL = "https://crzxuxcffqgrqntjrxod.supabase.co";
 const SUPABASE_KEY = "sb_publishable_Kxsql_aPZEknvC2mEHEG1Q_jt_gVFzj";
 
@@ -287,413 +143,215 @@ function showMessage(message) {
 function openAuth(action) {
   pendingAction = action ? {type:action} : null;
   document.getElementById("authReason").textContent =
-    action
-      ? "Please sign in or create an account to " + action + "."
-      : "Sign in or create a free ZONO account.";
+    action ? "Please sign in to " + action + "." : "Sign in or create a free ZONO account.";
   document.getElementById("authModal").classList.remove("hidden");
 }
-
 function closeAuth() {
   document.getElementById("authModal").classList.add("hidden");
 }
-
 function updateAccountUI() {
   document.getElementById("accountButton").textContent =
     currentUser ? (currentUser.email || "Account") : "Sign in";
   document.getElementById("logoutButton").classList.toggle("hidden",!currentUser);
 }
-
-async function signup() {
-  if (!db) return showMessage("Add your Supabase Publishable Key in the HTML first.");
-
-  const email = document.getElementById("authEmail").value.trim();
-  const password = document.getElementById("authPassword").value;
-
-  if (!email || password.length < 6) {
-    return showMessage("Enter your email and a password of at least 6 characters.");
-  }
-
-  showMessage("Creating account...");
-
-  const {data,error} = await db.auth.signUp({email,password});
-
-  if (error) return showMessage("Signup error: " + error.message);
-
-  if (data.session) {
-    currentUser = data.user;
-    updateAccountUI();
-    closeAuth();
-    showMessage("Account created successfully.");
-    await loadVideos();
-    runPendingAction();
-  } else {
-    showMessage("Account request sent. Check your email if confirmation is required.");
-  }
-}
-
-async function login() {
-  if (!db) return showMessage("Supabase is not configured.");
-
-  const email = document.getElementById("authEmail").value.trim();
-  const password = document.getElementById("authPassword").value;
-
-  if (!email || !password) {
-    return showMessage("Enter your email and password.");
-  }
-
-  showMessage("Signing in...");
-
-  const {data,error} = await db.auth.signInWithPassword({email,password});
-
-  if (error) return showMessage("Sign-in error: " + error.message);
-
-  currentUser = data.user;
-  updateAccountUI();
-  closeAuth();
-  showMessage("Signed in successfully.");
-  await loadVideos();
-  runPendingAction();
-}
-
-async function logout() {
-  if (!db) return;
-
-  const {error} = await db.auth.signOut();
-
-  if (error) return showMessage("Logout error: " + error.message);
-
-  currentUser = null;
-  updateAccountUI();
-  showMessage("Signed out.");
-  await loadVideos();
-}
-
 function requireAccount(action) {
   if (currentUser) return true;
   openAuth(action);
   return false;
 }
-
-function runPendingAction() {
-  const action = pendingAction;
-  pendingAction = null;
-  if (!action) return;
-
-  if (action.type === "upload a video") openUpload();
-  if (action.type === "create a channel") createChannel();
+async function signup() {
+  if (!db) return showMessage("Supabase is not configured.");
+  const email = document.getElementById("authEmail").value.trim();
+  const password = document.getElementById("authPassword").value;
+  if (!email || password.length < 6) return showMessage("Enter email and a password of at least 6 characters.");
+  showMessage("Creating account...");
+  const {data,error} = await db.auth.signUp({email,password});
+  if (error) return showMessage("Signup error: " + error.message);
+  if (data.session) {
+    currentUser = data.user; updateAccountUI(); closeAuth(); showMessage("Account created.");
+    await loadVideos(); runPendingAction();
+  } else {
+    showMessage("Check your email to confirm your account, if confirmation is enabled.");
+  }
 }
-
+async function login() {
+  if (!db) return showMessage("Supabase is not configured.");
+  const email = document.getElementById("authEmail").value.trim();
+  const password = document.getElementById("authPassword").value;
+  if (!email || !password) return showMessage("Enter your email and password.");
+  showMessage("Signing in...");
+  const {data,error} = await db.auth.signInWithPassword({email,password});
+  if (error) return showMessage("Sign-in error: " + error.message);
+  currentUser = data.user; updateAccountUI(); closeAuth();
+  showMessage("Signed in successfully.");
+  await loadVideos(); runPendingAction();
+}
+async function logout() {
+  if (!db) return;
+  const {error} = await db.auth.signOut();
+  if (error) return showMessage("Logout error: " + error.message);
+  currentUser = null; updateAccountUI(); showMessage("Signed out."); await loadVideos();
+}
+function runPendingAction() {
+  const action = pendingAction; pendingAction = null;
+  if (!action) return;
+  if (action.type === "upload a video") openUpload();
+  else if (action.type === "create a channel") createChannel();
+  else if (action.type === "share") shareVideo(action.path,action.title);
+  else if (action.type === "download") downloadVideo(action.path,action.title);
+}
 function openUpload() {
   if (!requireAccount("upload a video")) return;
-
   document.getElementById("uploadPanel").classList.remove("hidden");
   document.getElementById("uploadPanel").scrollIntoView({behavior:"smooth"});
 }
-
-function closeUpload() {
-  document.getElementById("uploadPanel").classList.add("hidden");
-}
+function closeUpload() { document.getElementById("uploadPanel").classList.add("hidden"); }
 
 async function signedUrl(path) {
-  const {data,error} = await db.storage
-    .from("zono-videos")
-    .createSignedUrl(path,3600);
-
+  const {data,error} = await db.storage.from("zono-videos").createSignedUrl(path,3600);
   if (error) throw error;
   return data.signedUrl;
 }
-
 async function shareVideo(path,title) {
   if (!requireAccount("share a video")) {
-    pendingAction = {type:"share",path,title};
-    return;
+    pendingAction = {type:"share",path,title}; return;
   }
-
   try {
     const url = await signedUrl(path);
-
-    if (navigator.share) {
-      await navigator.share({
-        title:title || "ZONO Video",
-        text:"Watch this video on ZONO",
-        url:url
-      });
-    } else {
-      window.prompt("Copy this temporary video link:",url);
-    }
+    if (navigator.share) await navigator.share({title:title || "ZONO Video",text:"Watch this video on ZONO",url});
+    else window.prompt("Copy this temporary video link:",url);
   } catch (error) {
-    if (error.name !== "AbortError") {
-      showMessage("Share error: " + error.message);
-    }
+    if (error.name !== "AbortError") showMessage("Share error: " + error.message);
   }
 }
-
 async function downloadVideo(path,title) {
   if (!requireAccount("download a video")) {
-    pendingAction = {type:"download",path,title};
-    return;
+    pendingAction = {type:"download",path,title}; return;
   }
-
   try {
     const url = await signedUrl(path);
     const link = document.createElement("a");
-    link.href = url;
-    link.download = (title || "zono-video") + ".mp4";
-    link.target = "_blank";
-    link.rel = "noopener";
-    document.body.appendChild(link);
-    link.click();
-    link.remove();
+    link.href = url; link.download = (title || "zono-video") + ".mp4";
+    link.target = "_blank"; link.rel = "noopener";
+    document.body.appendChild(link); link.click(); link.remove();
     showMessage("Download requested. Your browser may open the video first.");
-  } catch (error) {
-    showMessage("Download error: " + error.message);
-  }
+  } catch (error) { showMessage("Download error: " + error.message); }
 }
-
 async function uploadVideo() {
   if (!requireAccount("upload a video")) return;
-
   const file = document.getElementById("videoFile").files[0];
   const title = document.getElementById("videoTitle").value.trim();
   const description = document.getElementById("videoDescription").value.trim();
-
-  if (!file || !file.type.startsWith("video/") || !title) {
-    return showMessage("Choose a video and enter its title.");
-  }
-
-  if (file.size > 50 * 1024 * 1024) {
-    return showMessage("Video is over 50 MB. Choose a smaller video.");
-  }
-
-  const path = currentUser.id + "/" + Date.now() + "-" +
-    file.name.replace(/[^a-zA-Z0-9._-]/g,"_");
-
+  if (!file || !file.type.startsWith("video/") || !title) return showMessage("Choose a video and enter its title.");
+  if (file.size > 50 * 1024 * 1024) return showMessage("Video is over 50 MB. Choose a smaller video.");
+  const path = currentUser.id + "/" + Date.now() + "-" + file.name.replace(/[^a-zA-Z0-9._-]/g,"_");
   showMessage("Uploading video... Please wait.");
-
-  const {error:uploadError} = await db.storage
-    .from("zono-videos")
-    .upload(path,file,{contentType:file.type,upsert:false});
-
+  const {error:uploadError} = await db.storage.from("zono-videos").upload(path,file,{contentType:file.type,upsert:false});
   if (uploadError) return showMessage("Upload error: " + uploadError.message);
-
   const {error:dbError} = await db.from("videos").insert({
-    user_id:currentUser.id,
-    title:title,
-    description:description,
-    video_url:path
+    user_id:currentUser.id,title,description,video_url:path
   });
-
-  if (dbError) {
-    return showMessage("Video uploaded, but details were not saved: " + dbError.message);
-  }
-
+  if (dbError) return showMessage("Video uploaded, but details were not saved: " + dbError.message);
   document.getElementById("videoTitle").value = "";
   document.getElementById("videoDescription").value = "";
   document.getElementById("videoFile").value = "";
-
-  closeUpload();
-  showMessage("Video uploaded successfully!");
-  await loadVideos();
+  closeUpload(); showMessage("Video uploaded successfully!"); await loadVideos();
 }
-
 async function loadVideos() {
   const area = document.getElementById("videos");
-
   if (!db) {
-    area.innerHTML = '<div class="panel">Set your Supabase Publishable Key to load videos.</div>';
+    area.innerHTML = '<div class="panel empty">Supabase setup is required to load online videos.</div>';
     return;
   }
-
-  area.innerHTML = '<div class="panel">Loading videos...</div>';
-
-  let query = db.from("videos")
-    .select("id,user_id,title,description,video_url,created_at")
-    .order("created_at",{ascending:false});
-
-  if (currentCategory === "Your Videos" && currentUser) {
-    query = query.eq("user_id",currentUser.id);
-  }
-
+  area.innerHTML = '<div class="panel empty">Loading videos...</div>';
+  let query = db.from("videos").select("id,user_id,title,description,video_url,created_at").order("created_at",{ascending:false});
+  if (currentCategory === "Your Videos" && currentUser) query = query.eq("user_id",currentUser.id);
   if (searchTerm) {
-    const term = searchTerm.replace(/[%,()]/g," ");
-    query = query.or("title.ilike.%"+term+"%,description.ilike.%"+term+"%");
+    const term = searchTerm.replace(/[%,()]/g," ").trim();
+    if (term) query = query.or("title.ilike.%"+term+"%,description.ilike.%"+term+"%");
   }
-
   const {data,error} = await query;
-
   if (error) {
-    area.innerHTML = '<div class="panel">Could not load videos. Check Supabase table and permissions.</div>';
-    showMessage("Video list error: " + error.message);
-    return;
+    area.innerHTML = '<div class="panel empty">Could not load videos. Check your Supabase table and permissions.</div>';
+    showMessage("Video list error: " + error.message); return;
   }
-
   if (!data || !data.length) {
-    area.innerHTML = '<div class="panel">No videos found. Try another search or upload a video.</div>';
-    return;
+    area.innerHTML = '<div class="panel empty">No videos found. Try another search or upload a video.</div>'; return;
   }
-
   area.innerHTML = "";
-
   for (const video of data) {
     let url;
-
-    try {
-      url = await signedUrl(video.video_url);
-    } catch (error) {
-      continue;
-    }
-
-    const card = document.createElement("article");
-    card.className = "video-card";
-
+    try { url = await signedUrl(video.video_url); } catch (error) { continue; }
+    const card = document.createElement("article"); card.className = "video-card";
     const player = document.createElement("video");
-    player.controls = true;
-    player.preload = "metadata";
-    player.playsInline = true;
-    player.src = url;
-
-    const details = document.createElement("div");
-    details.className = "video-details";
-
-    const title = document.createElement("h3");
-    title.textContent = video.title || "ZONO Video";
-
-    const description = document.createElement("p");
-    description.textContent = video.description || "";
-
-    const date = document.createElement("p");
-    date.textContent = video.created_at
-      ? new Date(video.created_at).toLocaleDateString()
-      : "";
-
+    player.controls = true; player.preload = "metadata"; player.playsInline = true; player.src = url;
+    const details = document.createElement("div"); details.className = "video-details";
+    const title = document.createElement("h3"); title.textContent = video.title || "ZONO Video";
+    const description = document.createElement("p"); description.textContent = video.description || "";
+    const date = document.createElement("p"); date.textContent = video.created_at ? new Date(video.created_at).toLocaleDateString() : "";
     details.append(title,description,date);
-
-    const actions = document.createElement("div");
-    actions.className = "actions";
-
-    const share = document.createElement("button");
-    share.textContent = "↗ Share";
-    share.onclick = () => shareVideo(video.video_url,video.title);
-
-    const download = document.createElement("button");
-    download.textContent = "↓ Download";
-    download.onclick = () => downloadVideo(video.video_url,video.title);
-
-    actions.append(share,download);
-    card.append(player,details,actions);
-    area.appendChild(card);
+    const actions = document.createElement("div"); actions.className = "actions";
+    const share = document.createElement("button"); share.textContent = "↗ Share"; share.onclick = () => shareVideo(video.video_url,video.title);
+    const download = document.createElement("button"); download.textContent = "↓ Download"; download.onclick = () => downloadVideo(video.video_url,video.title);
+    actions.append(share,download); card.append(player,details,actions); area.appendChild(card);
   }
-
-  if (!area.children.length) {
-    area.innerHTML = '<div class="panel">No playable videos found.</div>';
-  }
+  if (!area.children.length) area.innerHTML = '<div class="panel empty">No playable videos found.</div>';
 }
-
 function searchVideos() {
   searchTerm = document.getElementById("searchInput").value.trim();
-  document.getElementById("videoHeading").textContent =
-    searchTerm ? "Search results: " + searchTerm : "✨ Videos for you";
+  document.getElementById("videoHeading").textContent = searchTerm ? "Search results: " + searchTerm : "✨ Videos for you";
   loadVideos();
 }
-
 function chooseCategory(category,button) {
   currentCategory = category;
-  document.querySelectorAll("#categories button").forEach(item => {
-    item.classList.remove("active");
-  });
-
+  document.querySelectorAll("#categories button").forEach(item => item.classList.remove("active"));
   button.classList.add("active");
-
-  document.getElementById("videoHeading").textContent =
-    category === "All" ? "✨ Videos for you" : category + " Videos";
-
+  document.getElementById("videoHeading").textContent = category === "All" ? "✨ Videos for you" : category + " Videos";
+  if (category !== "All" && category !== "Your Videos") {
+    showMessage("Category filtering needs a category column in your Supabase videos table.");
+  } else showMessage("");
   loadVideos();
 }
-
 function showSection(section,button) {
-  if (section === "Upload video") {
-    openUpload();
-    return;
-  }
-
-  if (section === "Create Channel") {
-    createChannel();
-    return;
-  }
-
+  if (section === "Create Channel") return createChannel();
+  if (section === "Upload video") return openUpload();
   if (["Your Videos","Subscriptions","Watch Later","Liked Videos","Downloads"].includes(section)) {
     if (!requireAccount("open " + section)) return;
-
     if (section === "Your Videos") {
       currentCategory = "Your Videos";
       document.getElementById("videoHeading").textContent = "Your Videos";
       loadVideos();
-    } else {
-      showMessage(section + " needs additional saved-data features.");
-    }
+    } else showMessage(section + " requires its own database feature.");
   } else {
-    currentCategory = ["Shorts","Trending","Music","Movies","Gaming"].includes(section)
-      ? section : "All";
-
-    document.getElementById("videoHeading").textContent =
-      section === "Home" ? "✨ Videos for you" : section + " Videos";
-
+    currentCategory = ["Shorts","Trending","Music","Movies","Gaming"].includes(section) ? section : "All";
+    document.getElementById("videoHeading").textContent = section === "Home" ? "✨ Videos for you" : section + " Videos";
     loadVideos();
   }
-
   document.querySelectorAll(".nav").forEach(item => item.classList.remove("active"));
   if (button) button.classList.add("active");
-
-  document.getElementById("videosSection").scrollIntoView({
-    behavior:"smooth",
-    block:"start"
-  });
+  document.getElementById("videosSection").scrollIntoView({behavior:"smooth",block:"start"});
 }
-
 function createChannel() {
   if (!requireAccount("create a channel")) {
-    pendingAction = {type:"create a channel"};
-    return;
+    pendingAction = {type:"create a channel"}; return;
   }
-
-  const name = window.prompt("Enter your channel name:");
-  if (!name || !name.trim()) return;
-
-  showMessage("Channel database support must be added in Supabase to save this channel.");
+  const name = prompt("Enter your channel name:");
+  if (name && name.trim()) showMessage("Channel creation needs a channel table in Supabase.");
 }
-
 async function start() {
-  if (!window.supabase) {
-    showMessage("Could not load Supabase. Check your internet connection.");
-    return;
-  }
-
-  if (!SUPABASE_KEY ||
-      SUPABASE_KEY === "PASTE_YOUR_SUPABASE_PUBLISHABLE_KEY_HERE") {
-    showMessage("Setup needed: paste your Supabase Publishable Key into this HTML.");
-    return;
-  }
-
+  if (!window.supabase) { showMessage("Could not load Supabase. Check your internet connection."); return; }
+  if (!SUPABASE_URL || !SUPABASE_KEY) { showMessage("Supabase configuration is missing."); return; }
   try {
     db = window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
-
     const {data,error} = await db.auth.getSession();
     if (error) throw error;
-
     currentUser = data.session ? data.session.user : null;
     updateAccountUI();
     await loadVideos();
-    
-    showMessage(currentUser
-      ? "Connected to ZONO. You are signed in."
-      : "Welcome! Watch and search videos without signing in.");
-
-  } catch (error) {
-    showMessage("Connection error: " + error.message);
-  }
+    showMessage(currentUser ? "Connected to ZONO. You are signed in." : "Welcome to ZONO.");
+  } catch (error) { showMessage("Connection error: " + error.message); }
 }
-
 start();
 </script>
 </body>
-</html>
+  </html>
